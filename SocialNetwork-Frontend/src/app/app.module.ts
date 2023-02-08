@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { Home2Component } from './home2/home2.component';
+import { PostComponent } from './Posts/post/post.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { Home2Component } from './home2/home2.component';
     RegisterComponent,
     Home1Component,
     LoginComponent,
-    Home2Component
+    Home2Component,
+    PostComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
