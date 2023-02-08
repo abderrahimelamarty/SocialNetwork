@@ -29,7 +29,10 @@ export class Home2Component implements OnInit {
   logout(): void {
    
         this.storageService.signOut();
+        this.router.navigate(['/home1']);
+
         window.location.reload();
+
       
      
   }

@@ -1,21 +1,170 @@
-<div class="container" *ngIf="currentUser; else loggedOut">
-    <header class="jumbotron">
-      <h3>
-        <strong>{{ currentUser.firstname }}</strong> Profile
-      </h3>
-      <h3>
-        
-      </h3>
-    </header>
-    
-    <p>
-      <strong>Email:</strong>
-      {{ currentUser.email }}
-    </p>
-    
-  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <title>MediaBook</title>
+</head>
+<body>
+
+
+<nav>
+  <div class="nav-left">
+  <img  src="https://previews.123rf.com/images/sellingpix/sellingpix1509/sellingpix150900237/45458488-social-network-logo-design-vector-template-team-circle-icon-teamwork-community-friendship-logotype-c.jpg" alt="Logo">
+      <input type="text" placeholder="Search Mediabook..">
   </div>
+
+  <div class="nav-middle">
+      <a href="#" class="active">
+          <i class="fa fa-home"></i>
+      </a>
+
+      <a href="#">
+          <i class="fa fa-user-friends"></i>
+      </a>
+
+      <a href="#">
+          <i class="fa fa-play-circle"></i>
+      </a>
+
+      <a href="#">
+          <i class="fa fa-users"></i>
+      </a>
+  </div>
+
+  <div class="nav-right">
+      <span routerLink="/profile" class="profile"></span>
+
+      <a href="#">
+          <i class="fa fa-bell"></i>
+      </a>
+
+      <button>
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+  </div>
+</nav>
+
+<div class="container rounded bg-white mt-5 mb-5" *ngIf="currentUser; else loggedOut">
+
+
+  <div class="container rounded bg-white mt-5 mb-5">
+    
+    <div class="row">
+      <div class="col-lg-5 col-md-6 col-xm-12 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img
+            class="rounded-circle mt-5"
+            width="150px"
+            src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png"
+          />
+          <span class="font-weight-bold">{{currentUser.firsname}}</span>
+          <span class="text-black-50">{{currentUser.email}}</span>
+          <span></span>
+        </div>
+      </div>
+     
+      <div class="col-md-5 border-right">
+        <form
+        *ngIf="!isSuccessful"
+        name="form"
+        #f="ngForm"
+         novalidate
+         >
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Profile Settings</h4>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label class="labels">Username</label>
+              <input
+                type="text"
+                name="username"
+                [(ngModel)]="currentUser.firstname"
+                minlength="3"
+                maxlength="20"
+                #username="ngModel"
+                class="form-control"
+                placeholder="Votre Nom"
+              
+
+              />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels">Password</label>
+              <input
+                type="text"
+                name="password"
+                [(ngModel)]="currentUser.password"
+              
+                minlength="6"
+                #password="ngModel"
+                class="form-control"
+                placeholder="Password"
+                
+              />
+            </div>
+
+            <div class="col-md-12 mt-3">
+              <label class="labels">Email </label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="currentUser.email"
+               
+                email
+                #email="ngModel"
+                placeholder="Votre Email "
+                
+            
+              />
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+              <div *ngIf="password?.errors?.['required']">Password is required</div>
+              <div *ngIf="password?.errors?.['minlength']">
+                Password must be at least 6 characters
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <button
+                class="btn btn-info profile-button"
+                type="button "
+            
+             
+               
+              >
+                Save Profile
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="isSignUpFailed">
+          Updating  failed!<br />{{ errorMessage }}
+        </div>
+      </form>
+      <div class="alert alert-success" *ngIf="isSuccessful">
+      User updated  successfuly
+      </div>
+      </div>
+     
+     
+      
   
-  <ng-template #loggedOut>
-    Please login.
-  </ng-template>
+   
+    </div>
+  </div>
+</div>
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+</body>
